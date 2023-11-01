@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  front:
+    image: front
+    ports:
+      - 8080:4200
+    command: "ng serve --host 0.0.0.0 --poll=2000 --port 4200 --disable-host-check"
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/home/app
+      - /home/app/node_modules
