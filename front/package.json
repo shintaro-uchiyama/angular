@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@types/fabric": "^5.3.5",
+    "fabric": "^5.3.0",
     "moveable": "^0.52.0",
     "ngx-moveable": "^0.49.0",
     "rxjs": "~7.8.0",

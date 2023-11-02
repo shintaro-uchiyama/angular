@@ -1,0 +1,16 @@
+<p>moveable works!</p>
+<div class="label" #label></div>
+<div class="moveable" #target><span>Moveable</span></div>
+<ngx-moveable 
+  #moveable 
+  [target]="target"
+  [draggable]="true"
+  [resizable]="true"
+  [origin]="false"
+  [rotatable]="true"
+  [pinchable]="true"
+  (drag)="onDrag($event)"
+  (resize)="onResize($event)"
+  (dragEnd)="onEnd()"
+  (resizeEnd)="onEnd()"
+  ></ngx-moveable>
