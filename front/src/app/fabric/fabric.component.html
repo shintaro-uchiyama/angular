@@ -1,1 +1,13 @@
-<p>fabric works!</p>
+<div class="menu">
+  <div class="menu-item">
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+  <div class="menu-item"><button>範囲選択</button></div>
+  <div class="menu-item">
+    <button>切り取り</button>
+  </div>
+</div>
+
+<div>
+  <canvas #story width="3000" height="3000"></canvas>
+</div>
