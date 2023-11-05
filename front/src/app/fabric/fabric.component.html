@@ -2,9 +2,16 @@
   <div class="menu-item">
     <input type="file" (change)="onFileSelected($event)" />
   </div>
-  <div class="menu-item"><button>範囲選択</button></div>
   <div class="menu-item">
-    <button>切り取り</button>
+    <button
+      [disabled]="!oneObjectIsSelected"
+      (click)="onClickSelectRange($event)"
+    >
+      範囲選択
+    </button>
+  </div>
+  <div class="menu-item">
+    <button [disabled]="!isSelectingRange">切り取り</button>
   </div>
 </div>
 
