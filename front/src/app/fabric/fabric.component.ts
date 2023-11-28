@@ -127,117 +127,33 @@ export class FabricComponent implements AfterViewInit, OnDestroy {
           this.boundingBox.width * (this.boundingBox.scaleX ?? 1) -
           (this.movingBox.left - this.boundingBox.left);
         const maxScaleX = rightRemainedWidth / this.movingBox.width;
+        console.log('origin left max', maxScaleX);
+        console.log('origin left box', this.movingBox);
         if (this.movingBox.scaleX && this.movingBox.scaleX > maxScaleX) {
           this.movingBox.scaleX = maxScaleX;
         }
       } else if (event.transform.originX === 'right') {
-        // let leftRemainedWidth = 0;
-        // if (this.movingBox.left >= this.boundingBox.left) {
-        //   leftRemainedWidth =
-        //     this.movingBox.width * (this.movingBox.scaleX ?? 1) +
-        //     (this.movingBox.left - this.boundingBox.left);
-        // } else {
-        //   leftRemainedWidth =
-        //     this.movingBox.left +
-        //     this.movingBox.width * (this.movingBox.scaleX ?? 1) -
-        //     this.boundingBox.left;
-        // }
-        // const maxScaleX = leftRemainedWidth / this.movingBox.width;
-        // console.log('current scale x', this.movingBox.scaleX);
-        // console.log('max scale x', maxScaleX);
-        // if (this.movingBox.scaleX && this.movingBox.scaleX > maxScaleX) {
-        //   console.log('is max');
-        //   this.movingBox.scaleX = maxScaleX;
-        // }
-        // const width =
-        //   (this.movingBox.aCoords?.br.x ?? 0) -
-        //   (this.boundingBox.aCoords?.bl.x ?? 0);
-        //
-        console.log('m ', this.movingBox);
-        console.log('b ', this.boundingBox);
-        console.log('e ', event);
-        // console.log('width', width);
-        console.log('moving left', this.movingBox.left);
-        console.log('moving width', this.movingBox.width);
-        console.log('bounding left', this.boundingBox.left);
-        if (this.movingBox.left < this.boundingBox.left) {
-          if (this.exceededScaleX === undefined) {
-            this.exceededScaleX = this.movingBox.scaleX;
-          }
-          this.movingBox.scaleX = this.exceededScaleX;
-          // this.movingBox.scaleX = width / this.movingBox.width;
-        } else {
+        console.log('event', event);
+
+        if (this.movingBox.left === this.boundingBox.left) {
+          this.exceededScaleX = this.movingBox.scaleX;
+        } else if (this.boundingBox.left < this.movingBox.left) {
           this.exceededScaleX = undefined;
         }
+
+        if (this.exceededScaleX !== undefined) {
+          this.movingBox.scaleX = this.exceededScaleX;
+        }
+        // if (this.movingBox.left <= this.boundingBox.left) {
+        //   if (this.exceededScaleX === undefined) {
+        //     this.exceededScaleX = this.movingBox.scaleX;
+        //   }
+        //   this.movingBox.scaleX = this.exceededScaleX;
+        //   this.movingBox.left = this.boundingBox.left;
+        // } else {
+        //   this.exceededScaleX = undefined;
+        // }
       }
-
-      const leftMaxLimit =
-        this.boundingBox.left +
-        this.boundingBox.width * (this.boundingBox.scaleX ?? 1) -
-        this.movingBox.width * (this.movingBox.scaleX ?? 1);
-      const leftMinLimit = this.boundingBox.left;
-
-      let targetLeft = this.movingBox.left;
-
-      if (this.movingBox.left > leftMaxLimit) {
-        targetLeft = leftMaxLimit;
-      } else if (this.movingBox.left < leftMinLimit) {
-        targetLeft = leftMinLimit;
-      }
-
-      this.movingBox.left = targetLeft;
-      // const leftMaxLimit =
-      //   this.boundingBox.left +
-      //   this.boundingBox.width * this.boundingBox.scaleX -
-      //   this.movingBox.width * this.movingBox.scaleX;
-      // const leftMinLimit = this.boundingBox.left;
-
-      // let targetLeft = this.movingBox.left;
-      // let targetScaleX = this.movingBox.scaleX;
-
-      // if (this.movingBox.left > leftMaxLimit) {
-      //   if (this.exceededScaleX === undefined) {
-      //     this.exceededScaleX = this.movingBox.scaleX;
-      //   }
-      //   targetScaleX = this.exceededScaleX;
-      //   targetLeft = leftMaxLimit;
-      // } else if (this.movingBox.left < leftMinLimit) {
-      //   if (this.exceededScaleX === undefined) {
-      //     this.exceededScaleX = this.movingBox.scaleX;
-      //   }
-      //   targetScaleX = this.exceededScaleX;
-      //   targetLeft = leftMinLimit;
-      // } else {
-      //   this.exceededScaleX = undefined;
-      // }
-
-      // this.movingBox.left = targetLeft;
-      // this.movingBox.scaleX = targetScaleX;
-
-      // let targetTop = this.movingBox.top;
-      // let targetScaleY = this.movingBox.scaleY;
-      // const topMaxLimit =
-      //   this.boundingBox.top +
-      //   this.boundingBox.height * this.boundingBox.scaleY -
-      //   this.movingBox.height * this.movingBox.scaleY;
-      // const topMinLimit = this.boundingBox.top;
-      // if (this.movingBox.top > topMaxLimit) {
-      //   if (this.exceededScaleY === undefined) {
-      //     this.exceededScaleY = this.movingBox.scaleY;
-      //   }
-      //   targetScaleY = this.exceededScaleY;
-      //   targetTop = topMaxLimit;
-      // } else if (this.movingBox.top < topMinLimit) {
-      //   if (this.exceededScaleY === undefined) {
-      //     this.exceededScaleY = this.movingBox.scaleY;
-      //   }
-      //   targetScaleY = this.exceededScaleY;
-      //   targetTop = topMinLimit;
-      // } else {
-      //   this.exceededScaleY = undefined;
-      // }
-      // this.movingBox.top = targetTop;
-      // this.movingBox.scaleY = targetScaleY;
     });
   }
 

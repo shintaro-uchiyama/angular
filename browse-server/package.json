@@ -1,0 +1,25 @@
+{
+  "name": "browse-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pregenerate": "rm -rf generate && mkdir generate",
+    "generate": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./generate --grpc_out=grpc_js:./generate --ts_out=grpc_js:./generate -I ./proto ./proto/*.proto",
+    "start": "ts-node src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.9",
+    "@types/google-protobuf": "^3.15.10",
+    "google-protobuf": "^3.21.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4"
+  }
+}

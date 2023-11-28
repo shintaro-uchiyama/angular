@@ -12,3 +12,11 @@ services:
     volumes:
       - ./front:/home/app
       - /home/app/node_modules
+  browse-server:
+    image: browse-server
+    build:
+      context: ./browse-server
+      dockerfile: Dockerfile
+    volumes:
+      - ./browse-server:/home/app
+      - /home/app/node_modules
